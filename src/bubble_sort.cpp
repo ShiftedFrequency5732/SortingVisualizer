@@ -6,7 +6,7 @@ void BubbleSort::Prepare() {
     this->finished = false;
 }
 
-bool BubbleSort::Step() {
+void BubbleSort::Step() {
     if (this->i < N_ELEMENTS - 1) {
         if (this->j < N_ELEMENTS - 1 - i) {
             if (this->arr[j] > this->arr[j + 1]) {
@@ -23,8 +23,8 @@ bool BubbleSort::Step() {
             ++this->i;
             this->j = 0;
         }
-        return false;
+
+        return;
     }
     this->finished = true;
-    return true;
 }

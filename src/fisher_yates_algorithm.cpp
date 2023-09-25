@@ -5,7 +5,7 @@ void FisherYatesShuffle::Prepare() {
     this->finished = false;
 }
 
-bool FisherYatesShuffle::Step() {
+void FisherYatesShuffle::Step() {
     if (iter >= 0) {
         int new_index = GetRandomValue(0, this->iter);
 
@@ -15,10 +15,9 @@ bool FisherYatesShuffle::Step() {
         this->arr[iter].setFillColor(RED);
 
         --this->iter;
-        return false;
+        return;
     }
 
     this->finished = true;
-    return true;
 }
 

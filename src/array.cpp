@@ -1,4 +1,5 @@
 #include "../include/array.hpp"
+#include <cmath>
 
 Array::Array() {
     for (int i = 0; i < N_ELEMENTS; ++i) {
@@ -11,7 +12,7 @@ Element& Array::operator [] (int i) {
 }
 
 void Array::Draw() {
-    int element_width = (1.0 * GetRenderWidth() / N_ELEMENTS);
+    int element_width = std::ceil(1.0 * GetRenderWidth() / N_ELEMENTS);
 
     for (int i = 0; i < N_ELEMENTS; ++i) {
         int element_heigth = GetRenderHeight() * vector[i].getValue() / N_ELEMENTS;

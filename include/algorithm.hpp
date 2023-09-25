@@ -13,6 +13,6 @@ public:
     virtual bool IsDone();
     virtual void Reset();
 
-    virtual bool Step() = 0;
+    virtual void Step() = 0;
     virtual void Prepare() = 0;
 };

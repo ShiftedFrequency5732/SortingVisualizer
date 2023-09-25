@@ -13,9 +13,7 @@ int main() {
     SetTargetFPS(GetMonitorRefreshRate(GetCurrentMonitor()));
     SetWindowState(FLAG_WINDOW_RESIZABLE);
 
-    // Create array object.
     Array arr;
-
     FisherYatesShuffle shuffler(arr);
 
     // Algorithms that can be used.
@@ -34,11 +32,13 @@ int main() {
         arr.Draw();
 
         if (run_algorithm) {
-            if(!shuffler.IsDone()) {
+            if (!shuffler.IsDone()) {
                 shuffler.Step();
             }
-            else if (array_adjust->Step()) {
-                // If the algorithm reached the end stop.
+            else if (!array_adjust->IsDone()) {
+                array_adjust->Step();
+            }
+            else {
                 run_algorithm = false;
             }
         }

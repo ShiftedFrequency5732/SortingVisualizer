@@ -9,6 +9,6 @@ private:
 public:
     using Algorithm::Algorithm;
 
-    bool Step(); 
+    void Step(); 
     void Prepare();
 };
