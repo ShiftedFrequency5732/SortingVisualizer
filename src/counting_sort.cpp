@@ -1,7 +1,7 @@
 #include "../include/counting_sort.hpp"
 
 void CountingSort::Prepare() {
-    // At the start, every elements appears exactly zero times.
+    // At the start, every element appears exactly zero times.
     for (int i = 0; i < N_ELEMENTS + 1; ++i) {
         this->histogram[i] = 0;
     }
@@ -17,7 +17,7 @@ void CountingSort::Prepare() {
 }
 
 void CountingSort::Step() {
-    if (this->i < N_ELEMENTS - 1) {
+    if (this->i < N_ELEMENTS) {
         // Increment the number of appearances of the current element, make it red, and move on to the next one.
         ++this->histogram[this->arr[this->i].getValue()];
         this->arr[this->i].setFillColor(RED);

@@ -1,6 +1,6 @@
 #include "../include/config.hpp"
-
 #include "../include/array.hpp"
+
 #include "../include/fisher_yates_shuffle.hpp"
 #include "../include/bubble_sort.hpp"
 #include "../include/selection_sort.hpp"
