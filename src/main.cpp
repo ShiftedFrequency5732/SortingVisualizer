@@ -5,6 +5,7 @@
 #include "../include/bubble_sort.hpp"
 #include "../include/selection_sort.hpp"
 #include "../include/insertion_sort.hpp"
+#include "../include/counting_sort.hpp"
 
 #include "../include/raylib.h"
 #include "../include/raymath.h"
@@ -22,6 +23,7 @@ int main() {
     BubbleSort bubble_alg(data);
     SelectionSort selection_alg(data);
     InsertionSort insertion_alg(data);
+    CountingSort counting_alg(data);
 
     // Pointer that points to the picked algorith, and flag that indicates whether to run the algorithm or not.
     Algorithm* sorting_algorithm = &bubble_alg;
@@ -58,6 +60,9 @@ int main() {
         }
         else if (!run_algorithm && IsKeyPressed(KEY_THREE)) {
             sorting_algorithm = &insertion_alg;
+        }
+        else if (!run_algorithm && IsKeyPressed(KEY_FOUR)) {
+            sorting_algorithm = &counting_alg;
         }
 
         if (IsKeyPressed(KEY_SPACE)) {
