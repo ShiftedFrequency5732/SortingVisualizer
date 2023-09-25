@@ -3,6 +3,7 @@
 #include "../include/array.hpp"
 #include "../include/fisher_yates_shuffle.hpp"
 #include "../include/bubble_sort.hpp"
+#include "../include/selection_sort.hpp"
 
 #include "../include/raylib.h"
 #include "../include/raymath.h"
@@ -17,10 +18,11 @@ int main() {
     FisherYatesShuffle shuffler(data);
 
     // Algorithms that can be used.
-    BubbleSort bs_alg(data);
+    BubbleSort bubble_alg(data);
+    SelectionSort selection_alg(data);
 
     // Pointer that points to the picked algorith, and flag that indicates whether to run the algorithm or not.
-    Algorithm* sorting_algorithm = &bs_alg;
+    Algorithm* sorting_algorithm = &bubble_alg;
     bool run_algorithm = false;
 
     while (!WindowShouldClose()) {
@@ -47,7 +49,10 @@ int main() {
 
         // Pick an algorithm.
         if (!run_algorithm && IsKeyPressed(KEY_ONE)) {
-            sorting_algorithm = &bs_alg;
+            sorting_algorithm = &bubble_alg;
+        }
+        else if (!run_algorithm && IsKeyPressed(KEY_TWO)) {
+            sorting_algorithm = &selection_alg;
         }
 
         if (IsKeyPressed(KEY_SPACE)) {
