@@ -4,7 +4,7 @@
 
 class FisherYatesShuffle : public Algorithm {
 private:
-    int iter;
+    int i;
 
 public:
     using Algorithm::Algorithm;
@@ -12,3 +12,4 @@ public:
     void Step(); 
     void Prepare();
 };
+

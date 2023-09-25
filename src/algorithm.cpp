@@ -1,6 +1,7 @@
 #include "../include/algorithm.hpp"
 
 Algorithm::Algorithm(Array& a) : arr(a) {
+    // At the start, we are not done obviously.
     this->finished = false;
 }
 
@@ -9,6 +10,7 @@ bool Algorithm::IsDone() {
 }
 
 void Algorithm::Reset() {
+    // Set that we are not done, and prepare the algorithm.
     this->finished = false;
     this->Prepare();
 }

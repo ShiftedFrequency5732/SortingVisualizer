@@ -1,6 +1,6 @@
 #include "../include/config.hpp"
-#include "../include/array.hpp"
 
+#include "../include/array.hpp"
 #include "../include/fisher_yates_shuffle.hpp"
 #include "../include/bubble_sort.hpp"
 
@@ -13,45 +13,48 @@ int main() {
     SetTargetFPS(GetMonitorRefreshRate(GetCurrentMonitor()));
     SetWindowState(FLAG_WINDOW_RESIZABLE);
 
-    Array arr;
-    FisherYatesShuffle shuffler(arr);
+    Array data;
+    FisherYatesShuffle shuffler(data);
 
     // Algorithms that can be used.
-    BubbleSort bs_alg(arr);
+    BubbleSort bs_alg(data);
 
     // Pointer that points to the picked algorith, and flag that indicates whether to run the algorithm or not.
-    Algorithm* array_adjust = &bs_alg;
+    Algorithm* sorting_algorithm = &bs_alg;
     bool run_algorithm = false;
 
     while (!WindowShouldClose()) {
         BeginDrawing();
 
-        // Clear the window from previous loop.
+        // Clear the window from previous loop, draw the array.
         ClearBackground(BLANK);
-
-        arr.Draw();
+        data.Draw();
 
         if (run_algorithm) {
             if (!shuffler.IsDone()) {
+                // Shuffle the array first.
                 shuffler.Step();
             }
-            else if (!array_adjust->IsDone()) {
-                array_adjust->Step();
+            else if (!sorting_algorithm->IsDone()) {
+                // After shuffling the array, sort it.
+                sorting_algorithm->Step();
             }
             else {
+                // After sorting the array, stop running algorithms.
                 run_algorithm = false;
             }
         }
 
-        if (IsKeyPressed(KEY_ONE)) {
-            array_adjust = &bs_alg;
+        // Pick an algorithm.
+        if (!run_algorithm && IsKeyPressed(KEY_ONE)) {
+            sorting_algorithm = &bs_alg;
         }
 
-        if (!run_algorithm && IsKeyPressed(KEY_SPACE)) {
-            // In case the user pressed space, prepare the algorithm, and start running it in the next loop iteration.
-            shuffler.Prepare();
-            array_adjust->Prepare();
-            run_algorithm = true;
+        if (IsKeyPressed(KEY_SPACE)) {
+            // Prepare shuffler and the sorting algorithm, toggle the run flag.
+            shuffler.Reset();
+            sorting_algorithm->Reset();
+            run_algorithm = !run_algorithm;
         }
 
         EndDrawing();
