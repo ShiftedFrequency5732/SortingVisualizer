@@ -2,6 +2,7 @@
 #include "../include/array.hpp"
 
 #include "../include/fisher_yates_shuffle.hpp"
+#include "../include/bubble_sort.hpp"
 
 #include "../include/raylib.h"
 #include "../include/raymath.h"
@@ -15,11 +16,13 @@ int main() {
     // Create array object.
     Array arr;
 
+    FisherYatesShuffle shuffler(arr);
+
     // Algorithms that can be used.
-    FisherYatesShuffle f(arr);
+    BubbleSort bs_alg(arr);
 
     // Pointer that points to the picked algorith, and flag that indicates whether to run the algorithm or not.
-    Algorithm* array_adjust = &f;
+    Algorithm* array_adjust = &bs_alg;
     bool run_algorithm = false;
 
     while (!WindowShouldClose()) {
@@ -31,14 +34,22 @@ int main() {
         arr.Draw();
 
         if (run_algorithm) {
-            if (array_adjust->Step()) {
+            if(!shuffler.IsDone()) {
+                shuffler.Step();
+            }
+            else if (array_adjust->Step()) {
                 // If the algorithm reached the end stop.
                 run_algorithm = false;
             }
         }
 
+        if (IsKeyPressed(KEY_ONE)) {
+            array_adjust = &bs_alg;
+        }
+
         if (!run_algorithm && IsKeyPressed(KEY_SPACE)) {
             // In case the user pressed space, prepare the algorithm, and start running it in the next loop iteration.
+            shuffler.Prepare();
             array_adjust->Prepare();
             run_algorithm = true;
         }

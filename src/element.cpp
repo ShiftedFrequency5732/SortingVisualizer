@@ -25,3 +25,22 @@ bool operator < (const Element& e1, const Element& e2) {
     return (e1.value < e2.value);
 }
 
+bool operator > (const Element& e1, const Element& e2) {
+    return (e1.value > e2.value);
+}
+
+bool operator <= (const Element& e1, const Element& e2) {
+    return (e1.value <= e2.value);
+}
+
+bool operator >= (const Element& e1, const Element& e2) {
+    return (e1.value >= e2.value);
+}
+
+bool operator == (const Element& e1, const Element& e2) {
+    return (e1.value == e2.value);
+}
+
+bool operator != (const Element& e1, const Element& e2) {
+    return (e1.value != e2.value);
+}

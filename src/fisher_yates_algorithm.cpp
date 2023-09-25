@@ -2,6 +2,7 @@
 
 void FisherYatesShuffle::Prepare() {
     this->iter = N_ELEMENTS - 1;
+    this->finished = false;
 }
 
 bool FisherYatesShuffle::Step() {
