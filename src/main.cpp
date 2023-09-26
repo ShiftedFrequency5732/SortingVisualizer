@@ -1,6 +1,9 @@
-#include "../include/config.hpp"
-#include "../include/array.hpp"
+#include "../include/raylib.h"
+#include "../include/raymath.h"
 
+#include "../include/config.hpp"
+
+#include "../include/array.hpp"
 #include "../include/fisher_yates_shuffle.hpp"
 #include "../include/bogo_sort.hpp"
 #include "../include/counting_sort.hpp"
@@ -9,9 +12,6 @@
 #include "../include/insertion_sort.hpp"
 #include "../include/merge_sort.hpp"
 #include "../include/quick_sort.hpp"
-
-#include "../include/raylib.h"
-#include "../include/raymath.h"
 
 int main() {
     // Initialize the window with the width, the height, the title, set the target FPS, make it resizable.
@@ -23,11 +23,11 @@ int main() {
     FisherYatesShuffle shuffler(data);
 
     // Algorithms that can be used.
+    BogoSort bogo_alg(data);
+    CountingSort counting_alg(data);
     BubbleSort bubble_alg(data);
     SelectionSort selection_alg(data);
     InsertionSort insertion_alg(data);
-    CountingSort counting_alg(data);
-    BogoSort bogo_alg(data);
     MergeSort merge_alg(data);
     QuickSort quick_alg(data);
 
@@ -35,11 +35,23 @@ int main() {
     Algorithm* sorting_algorithm = &bubble_alg;
     bool run_algorithm = false;
 
+    // Flag that indicates whether to show help text or not.
+    bool show_help = true;
+
     while (!WindowShouldClose()) {
         // Prepare new frame buffer. Clear the window from previous loop. Draw the array.
         BeginDrawing();
         ClearBackground(BLANK);
         data.Draw();
+
+        if (show_help) {
+            // Draw the help box on the center of the screen, based on the text size.
+            Vector2 txt_size = MeasureTextEx(GetFontDefault(), HELP_TEXT, FONT_SIZE, SPACING);
+            DrawRectangle(GetRenderWidth() / 2 - txt_size.x / 2 - BG_MARGIN / 2, GetRenderHeight() / 2 - txt_size.y / 2 - BG_MARGIN / 2, txt_size.x + BG_MARGIN, txt_size.y + BG_MARGIN, LIGHTGRAY);
+            DrawTextEx(GetFontDefault(), HELP_TEXT, { GetRenderWidth() / 2 - txt_size.x / 2, GetRenderHeight() / 2 - txt_size.y / 2 }, FONT_SIZE, SPACING, BLACK);
+        }
+
+        EndDrawing();
 
         if (run_algorithm) {
             if (!shuffler.IsDone()) {
@@ -54,6 +66,11 @@ int main() {
                 // After sorting the array, stop running the algorithms.
                 run_algorithm = false;
             }
+        }
+
+        if ((IsKeyDown(KEY_LEFT_SHIFT) || IsKeyDown(KEY_RIGHT_SHIFT)) && IsKeyPressed(KEY_SLASH)) {
+            // In case the question mark has been pressed toggle the help.
+            show_help = !show_help;
         }
 
         // Pick an algorithm.
@@ -85,8 +102,6 @@ int main() {
             sorting_algorithm->Reset();
             run_algorithm = !run_algorithm;
         }
-
-        EndDrawing();
     }
 
     return 0;
