@@ -7,8 +7,8 @@ void BubbleSort::Prepare() {
 }
 
 void BubbleSort::Step() {
-    if (this->i < N_ELEMENTS - 1) {
-        if (this->j < N_ELEMENTS - 1 - i) {
+    if (this->i < this->ArraySize() - 1) {
+        if (this->j < this->ArraySize() - 1 - i) {
             // When comparing two elements, set their color to red.
             this->arr[j].SetFillColor(RED);
             this->arr[j + 1].SetFillColor(RED);
@@ -24,10 +24,10 @@ void BubbleSort::Step() {
             // Move to the next element.
             ++this->j;
 
-            if (this->j >= N_ELEMENTS - 1 - i) {
+            if (this->j >= this->ArraySize() - 1 - i) {
                 // If we finished one round of the bubble sort, move onto the next.
                 // Color the newly sorted element with blue, and do not reset its color to default.
-                this->arr[N_ELEMENTS - 1 - i].SetFillColor(BLUE, false);
+                this->arr[this->ArraySize() - 1 - i].SetFillColor(BLUE, false);
                 this->j = 0;
                 ++this->i;
             }

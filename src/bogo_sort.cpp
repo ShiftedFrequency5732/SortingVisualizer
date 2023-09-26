@@ -2,7 +2,7 @@
 
 void BogoSort::Prepare() {
     // Set the iterator for shuffling to be at the last element, and for checking if elements are sorted at the start.
-    this->i_shuffle = N_ELEMENTS - 1;
+    this->i_shuffle = this->ArraySize() - 1;
     this->j_check = 0;
 }
 
@@ -25,7 +25,7 @@ void BogoSort::Step() {
         --this->i_shuffle;
         return;
     }
-    else if (this->j_check < N_ELEMENTS - 1) {
+    else if (this->j_check < this->ArraySize() - 1) {
         // Color the two elements that we will compare with red.
         this->arr[j_check].SetFillColor(RED);
         this->arr[j_check + 1].SetFillColor(RED);

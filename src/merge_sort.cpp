@@ -68,7 +68,7 @@ void MergeSort::Merge(int low, int mid, int high) {
 }
 
 void MergeSort::Step() {
-    if (partition_size <= N_ELEMENTS - 1) {
+    if (partition_size <= this->ArraySize() - 1) {
         if (this->low_round_done) {
             // In case we went through all the partitions of the current size, we will go through partitions of the current size * 2.
             partition_size = 2 * partition_size;
@@ -76,10 +76,10 @@ void MergeSort::Step() {
             this->low = 0;
         }
 
-        if (low < N_ELEMENTS - 1) {
+        if (low < this->ArraySize() - 1) {
             // Calculate the boundaries for the left and the right partition, merge both of them.
-            int mid = std::min(low + partition_size - 1, N_ELEMENTS - 1);
-            int high = std::min(low + 2 * partition_size - 1, N_ELEMENTS - 1);
+            int mid = std::min(low + partition_size - 1, this->ArraySize() - 1);
+            int high = std::min(low + 2 * partition_size - 1, this->ArraySize() - 1);
             this->Merge(low, mid, high);
 
             if (this->merge_done) {

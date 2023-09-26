@@ -7,6 +7,8 @@ protected:
     Array& arr;
     bool finished;
 
+    int ArraySize() const;
+
 public:
     Algorithm(Array& a);
 

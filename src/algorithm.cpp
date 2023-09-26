@@ -5,6 +5,10 @@ Algorithm::Algorithm(Array& a) : arr(a) {
     this->finished = false;
 }
 
+int Algorithm::ArraySize() const {
+    return this->arr.GetVisible();
+}
+
 bool Algorithm::IsDone() {
     return this->finished;
 }

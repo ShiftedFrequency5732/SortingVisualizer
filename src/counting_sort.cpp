@@ -2,7 +2,7 @@
 
 void CountingSort::Prepare() {
     // At the start, every element appears exactly zero times.
-    for (int i = 0; i < N_ELEMENTS + 1; ++i) {
+    for (int i = 0; i < this->ArraySize() + 1; ++i) {
         this->histogram[i] = 0;
     }
 
@@ -17,7 +17,7 @@ void CountingSort::Prepare() {
 }
 
 void CountingSort::Step() {
-    if (this->i < N_ELEMENTS) {
+    if (this->i < this->ArraySize()) {
         // Increment the number of appearances of the current element, make it red, and move on to the next one.
         ++this->histogram[this->arr[this->i].GetValue()];
         this->arr[this->i].SetFillColor(RED);
@@ -25,7 +25,7 @@ void CountingSort::Step() {
         return;
     }
 
-    if (this->free < N_ELEMENTS) {
+    if (this->free < this->ArraySize()) {
         while (this->histogram[this->k] == 0) {
             // As long as the current element appears zero times, find one that appears > 0 times.
             ++this->k;

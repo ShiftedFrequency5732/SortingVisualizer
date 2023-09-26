@@ -10,7 +10,7 @@ void InsertionSort::Prepare() {
 }
 
 void InsertionSort::Step() {
-    if (this->i < N_ELEMENTS) {
+    if (this->i < this->ArraySize()) {
         if (this->j_round_done) {
             // If we did reach in the previous round the start and found the first smaller element than i-th element.
             // Then we will again, remember the current element at the position i, and try to find the smaller element than it to the left.
@@ -22,7 +22,7 @@ void InsertionSort::Step() {
         if (this->j >= 0 && this->arr[this->j] > this->temp) {
             // If the j-th element is greater than temp, copy it to the following position, make it red.
             this->arr[this->j + 1] = this->arr[this->j];
-            if (this->i < N_ELEMENTS - 1) {
+            if (this->i < this->ArraySize() - 1) {
                 this->arr[this->j + 1].SetFillColor(RED);
             }
             --j;

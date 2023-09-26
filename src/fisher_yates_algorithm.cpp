@@ -2,7 +2,7 @@
 
 void FisherYatesShuffle::Prepare() {
     // Set the iterator to be at the last element.
-    this->i = N_ELEMENTS - 1;
+    this->i = this->ArraySize() - 1;
 }
 
 void FisherYatesShuffle::Step() {
