@@ -1,47 +1,48 @@
 #include "../include/bogo_sort.hpp"
 
 void BogoSort::Prepare() {
-    // Set the iterator to be at the end.
-    this->i = N_ELEMENTS - 1;
-    this->j = 0;
+    // Set the iterator for shuffling to be at the last element, and for checking if elements are sorted at the start.
+    this->i_shuffle = N_ELEMENTS - 1;
+    this->j_check = 0;
 }
 
 void BogoSort::Step() {
-    if (i >= 1) {
-        // For each element, (except the first one), that has index i, generate a new index in range [0, i].
+    if (i_shuffle >= 1) {
+        // For each element, (except the first one), that has index i, generate a new index in the range [0, i].
         // We won't do this for the first element, as that element will always get the newly generated index to be 0.
-        int new_index = GetRandomValue(0, this->i);
+        int new_index = GetRandomValue(0, this->i_shuffle);
 
-        // Swap the elements at the current index i and newly generated indeces..
-        Element temp = this->arr[i];
-        this->arr[i] = this->arr[new_index];
+        // Swap the elements at the current index i and newly generated index.
+        Element temp = this->arr[i_shuffle];
+        this->arr[i_shuffle] = this->arr[new_index];
         this->arr[new_index] = temp;
 
         // Color the elements RED.
-        this->arr[i].SetFillColor(RED);
+        this->arr[i_shuffle].SetFillColor(RED);
         this->arr[new_index].SetFillColor(RED);
 
-        --this->i;
+        // Move to the previous element to generate new index.
+        --this->i_shuffle;
         return;
     }
-    else if (this->j < N_ELEMENTS - 1) {
+    else if (this->j_check < N_ELEMENTS - 1) {
         // Color the two elements that we will compare with red.
-        this->arr[j].SetFillColor(RED);
-        this->arr[j + 1].SetFillColor(RED);
+        this->arr[j_check].SetFillColor(RED);
+        this->arr[j_check + 1].SetFillColor(RED);
 
-        if (this->arr[j] > this->arr[j + 1]) {
+        if (this->arr[j_check] > this->arr[j_check + 1]) {
             // If the elements aren't sorted, start over with shuffling.
-            this->i = N_ELEMENTS - 1;
-            this->j = 0;
+            this->Prepare();
         }
         else {
-            ++this->j;
+            // If the current elements are sorted, move to the next element to check further.
+            ++this->j_check;
         }
 
         return;
     }
 
-    // If we did this for all the elements, we finished.
+    // If the array is sorted, we finished.
     this->finished = true;
 }
 

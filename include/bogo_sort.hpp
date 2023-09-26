@@ -4,12 +4,12 @@
 
 class BogoSort : public Algorithm {
 private:
-    int i, j;
+    int i_shuffle, j_check;
 
 public:
     using Algorithm::Algorithm;
 
-    void Step(); 
+    void Step();
     void Prepare();
 };
 

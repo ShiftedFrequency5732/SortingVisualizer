@@ -32,7 +32,7 @@ int main() {
     QuickSort quick_alg(data);
 
     // Pointer that points to the picked algorithm, and flag that indicates whether to run the algorithm or not.
-    Algorithm* sorting_algorithm = &bubble_alg;
+    Algorithm* sorting_algorithm = &bogo_alg;
     bool run_algorithm = false;
 
     // Flag that indicates whether to show help text or not.
@@ -101,6 +101,7 @@ int main() {
             shuffler.Reset();
             sorting_algorithm->Reset();
             run_algorithm = !run_algorithm;
+            show_help = false;
         }
     }
 
