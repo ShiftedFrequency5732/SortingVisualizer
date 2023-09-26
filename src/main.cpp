@@ -103,6 +103,11 @@ int main() {
             run_algorithm = !run_algorithm;
             show_help = false;
         }
+
+        if (!run_algorithm) {
+            float scroll_value = GetMouseWheelMove();
+            data.SetVisible(data.GetVisible() + scroll_value);
+        }
     }
 
     return 0;
