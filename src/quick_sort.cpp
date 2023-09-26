@@ -134,7 +134,7 @@ void QuickSort::Step() {
         this->arr[pivot_index].SetFillColor(BLUE, false);
 
         // Add to the stack of ranges both ranges, but smaller one first, so we won't have as many ranges in it.
-        if ((pivot_index - low) <= (high - pivot_index)) {
+        if ((pivot_index - 1) - low + 1 <= high - (pivot_index + 1) + 1) {
             ranges.push({ low, pivot_index - 1 });
             ranges.push({ pivot_index + 1, high});
         }
