@@ -43,13 +43,13 @@ void MergeSort::Merge(int left, int mid, int right) {
     else {
         if (a < left_length) {
             this->arr[free].setValue(temp_left[a]);
-            this->arr[free].setFillColor(BLUE);
+            this->arr[free].setFillColor(RED);
             ++free;
             ++a;
         }
         else if (b < right_length) {
             this->arr[free].setValue(temp_right[b]);
-            this->arr[free].setFillColor(BLUE);
+            this->arr[free].setFillColor(RED);
             ++free;
             ++b;
         }
@@ -85,4 +85,6 @@ void MergeSort::Step() {
 
         return;
     }
+
+    this->finished = true;
 }

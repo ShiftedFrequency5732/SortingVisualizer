@@ -18,7 +18,7 @@ void Array::Draw() {
 
     for (int i = 0; i < N_ELEMENTS; ++i) {
         // Calculate the height of each element, based on its height, the height will be equal to the % of the window height.
-        int element_heigth = ceil(1.0 * GetRenderHeight() * vector[i].getValue() / N_ELEMENTS);
+        int element_heigth = (1.0 * GetRenderHeight() * vector[i].getValue() / N_ELEMENTS);
 
         // Draw the element the i-th slice of the window, at the height of the element from the bottom of the screen of calculated size, with its current color.
         DrawRectangle(i * element_width, GetRenderHeight() - element_heigth, element_width, element_heigth, vector[i].getFillColor());
