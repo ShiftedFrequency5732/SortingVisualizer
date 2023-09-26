@@ -2,11 +2,11 @@
 #include "../include/array.hpp"
 
 #include "../include/fisher_yates_shuffle.hpp"
+#include "../include/bogo_sort.hpp"
+#include "../include/counting_sort.hpp"
 #include "../include/bubble_sort.hpp"
 #include "../include/selection_sort.hpp"
 #include "../include/insertion_sort.hpp"
-#include "../include/counting_sort.hpp"
-#include "../include/bogo_sort.hpp"
 #include "../include/merge_sort.hpp"
 #include "../include/quick_sort.hpp"
 
@@ -31,47 +31,46 @@ int main() {
     MergeSort merge_alg(data);
     QuickSort quick_alg(data);
 
-    // Pointer that points to the picked algorith, and flag that indicates whether to run the algorithm or not.
+    // Pointer that points to the picked algorithm, and flag that indicates whether to run the algorithm or not.
     Algorithm* sorting_algorithm = &bubble_alg;
     bool run_algorithm = false;
 
     while (!WindowShouldClose()) {
+        // Prepare new frame buffer. Clear the window from previous loop. Draw the array.
         BeginDrawing();
-
-        // Clear the window from previous loop, draw the array.
         ClearBackground(BLANK);
         data.Draw();
 
         if (run_algorithm) {
             if (!shuffler.IsDone()) {
-                // Shuffle the array first.
+                // Shuffle the array first before running the actual sorting algorithm.
                 shuffler.Step();
             }
             else if (!sorting_algorithm->IsDone()) {
-                // After shuffling the array, sort it.
+                // After shuffling the array, sort it using the picked algortihm.
                 sorting_algorithm->Step();
             }
             else {
-                // After sorting the array, stop running algorithms.
+                // After sorting the array, stop running the algorithms.
                 run_algorithm = false;
             }
         }
 
         // Pick an algorithm.
         if (!run_algorithm && IsKeyPressed(KEY_ONE)) {
-            sorting_algorithm = &bubble_alg;
+            sorting_algorithm = &bogo_alg;
         }
         else if (!run_algorithm && IsKeyPressed(KEY_TWO)) {
-            sorting_algorithm = &selection_alg;
-        }
-        else if (!run_algorithm && IsKeyPressed(KEY_THREE)) {
-            sorting_algorithm = &insertion_alg;
-        }
-        else if (!run_algorithm && IsKeyPressed(KEY_FOUR)) {
             sorting_algorithm = &counting_alg;
         }
+        else if (!run_algorithm && IsKeyPressed(KEY_THREE)) {
+            sorting_algorithm = &bubble_alg;
+        }
+        else if (!run_algorithm && IsKeyPressed(KEY_FOUR)) {
+            sorting_algorithm = &selection_alg;
+        }
         else if (!run_algorithm && IsKeyPressed(KEY_FIVE)) {
-            sorting_algorithm = &bogo_alg;
+            sorting_algorithm = &insertion_alg;
         }
         else if (!run_algorithm && IsKeyPressed(KEY_SIX)) {
             sorting_algorithm = &merge_alg;
