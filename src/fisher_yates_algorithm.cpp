@@ -17,8 +17,8 @@ void FisherYatesShuffle::Step() {
         this->arr[new_index] = temp;
 
         // Color the elements RED.
-        this->arr[i].setFillColor(RED);
-        this->arr[new_index].setFillColor(RED);
+        this->arr[i].SetFillColor(RED);
+        this->arr[new_index].SetFillColor(RED);
 
         --this->i;
         return;

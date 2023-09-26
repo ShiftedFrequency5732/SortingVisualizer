@@ -6,7 +6,7 @@ constexpr int INITIAL_HEIGHT = 800;
 constexpr const char* WINDOW_TITLE = "Sorting Visualizer";
 
 // Array related constants.
-constexpr int N_ELEMENTS = 250;
+constexpr int N_ELEMENTS = 100;
 
 // Help related constants.
 constexpr int SPACING = 1;

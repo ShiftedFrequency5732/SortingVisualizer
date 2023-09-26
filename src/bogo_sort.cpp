@@ -18,16 +18,16 @@ void BogoSort::Step() {
         this->arr[new_index] = temp;
 
         // Color the elements RED.
-        this->arr[i].setFillColor(RED);
-        this->arr[new_index].setFillColor(RED);
+        this->arr[i].SetFillColor(RED);
+        this->arr[new_index].SetFillColor(RED);
 
         --this->i;
         return;
     }
     else if (this->j < N_ELEMENTS - 1) {
         // Color the two elements that we will compare with red.
-        this->arr[j].setFillColor(RED);
-        this->arr[j + 1].setFillColor(RED);
+        this->arr[j].SetFillColor(RED);
+        this->arr[j + 1].SetFillColor(RED);
 
         if (this->arr[j] > this->arr[j + 1]) {
             // If the elements aren't sorted, start over with shuffling.

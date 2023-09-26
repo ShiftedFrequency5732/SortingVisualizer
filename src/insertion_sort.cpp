@@ -20,7 +20,7 @@ void InsertionSort::Step() {
         if (this->j >= 0 && this->arr[this->j] > this->temp) {
             // If the j-th element is greater than temp, copy it to the following position, fill it with red.
             this->arr[this->j + 1] = this->arr[this->j];
-            this->arr[this->j + 1].setFillColor(RED);
+            this->arr[this->j + 1].SetFillColor(RED);
             --j;
         }
         else {

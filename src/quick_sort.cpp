@@ -31,7 +31,7 @@ void QuickSort::Partition() {
     if (this->confirmed) {
         if (!this->done_left) {
             if (this->arr[curr_left] <= pivot && curr_left < curr_right) {
-                this->arr[curr_left].setFillColor(RED);
+                this->arr[curr_left].SetFillColor(RED);
                 ++this->curr_left;
             }
             else {
@@ -42,7 +42,7 @@ void QuickSort::Partition() {
 
         if (!this->done_right) {
             if (this->arr[curr_right] > pivot) {
-                this->arr[curr_right].setFillColor(RED);
+                this->arr[curr_right].SetFillColor(RED);
                 --this->curr_right;
             }
             else {
@@ -59,8 +59,8 @@ void QuickSort::Partition() {
             this->arr[this->curr_left] = this->arr[this->curr_right];
             this->arr[this->curr_right] = temp;
 
-            this->arr[this->curr_left].setFillColor(RED);
-            this->arr[this->curr_right].setFillColor(RED);
+            this->arr[this->curr_left].SetFillColor(RED);
+            this->arr[this->curr_right].SetFillColor(RED);
             if (this->curr_left > this->curr_right) {
                 this->confirmed = false;
             }
@@ -72,8 +72,8 @@ void QuickSort::Partition() {
     this->arr[curr_right] = pivot;
     pivot_index = curr_right;
 
-    this->arr[curr_right].setFillColor(RED);
-    this->arr[low].setFillColor(RED);
+    this->arr[curr_right].SetFillColor(RED);
+    this->arr[low].SetFillColor(RED);
 
     this->done_partitioning = true;
 }

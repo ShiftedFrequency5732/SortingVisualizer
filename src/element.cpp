@@ -1,24 +1,34 @@
 #include "../include/element.hpp"
 
-Element::Element(int value) {
+Element::Element(int value, Color fill) {
     this->value = value;
-    this->fill = WHITE;
+    this->default_fill = fill;
+    this->current_fill = fill;
 }
 
-void Element::setValue(int value) {
+void Element::SetValue(int value) {
     this->value = value;
 }
 
-int Element::getValue() const {
+int Element::GetValue() const {
     return this->value;
 }
 
-void Element::setFillColor(Color fill) {
-    this->fill = fill;
+void Element::SetFillColor(Color fill, bool reset_fill) {
+    this->current_fill = fill;
+    this->reset_fill = reset_fill;
 }
 
-Color Element::getFillColor() const {
-    return this->fill;
+Color Element::GetFillColor() const {
+    return this->current_fill;
+}
+
+bool Element::ShouldResetFill() const {
+    return this->reset_fill;
+}
+
+void Element::ResetFill() {
+    this->current_fill = this->default_fill;
 }
 
 bool operator < (const Element& e1, const Element& e2) {

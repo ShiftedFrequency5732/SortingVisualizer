@@ -14,10 +14,10 @@ void MergeSort::Merge(int left, int mid, int right) {
         this->right_length = right - (mid + 1) + 1;
 
         for (int i = 0; i < this->left_length; ++i) {
-            this->temp_left[i] = this->arr[left + i].getValue();
+            this->temp_left[i] = this->arr[left + i].GetValue();
         }
         for (int i = 0; i < this->right_length; ++i) {
-            this->temp_right[i] = this->arr[mid + 1 + i].getValue();
+            this->temp_right[i] = this->arr[mid + 1 + i].GetValue();
         }
 
 
@@ -29,27 +29,27 @@ void MergeSort::Merge(int left, int mid, int right) {
 
     if (a < left_length && b < right_length) {
         if (temp_left[a] < temp_right[b]) {
-            this->arr[free].setValue(temp_left[a]);
-            this->arr[free].setFillColor(RED);
+            this->arr[free].SetValue(temp_left[a]);
+            this->arr[free].SetFillColor(RED);
             ++a;
         }
         else {
-            this->arr[free].setValue(temp_right[b]);
-            this->arr[free].setFillColor(RED);
+            this->arr[free].SetValue(temp_right[b]);
+            this->arr[free].SetFillColor(RED);
             ++b;
         }
         ++free;
     }
     else {
         if (a < left_length) {
-            this->arr[free].setValue(temp_left[a]);
-            this->arr[free].setFillColor(RED);
+            this->arr[free].SetValue(temp_left[a]);
+            this->arr[free].SetFillColor(RED);
             ++free;
             ++a;
         }
         else if (b < right_length) {
-            this->arr[free].setValue(temp_right[b]);
-            this->arr[free].setFillColor(RED);
+            this->arr[free].SetValue(temp_right[b]);
+            this->arr[free].SetFillColor(RED);
             ++free;
             ++b;
         }

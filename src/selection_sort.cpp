@@ -26,7 +26,7 @@ void SelectionSort::Step() {
                 this->min_i = j;
             }
             // Color the element you are currently at with red, and increment the j.
-            this->arr[j++].setFillColor(RED);
+            this->arr[j++].SetFillColor(RED);
         }
 
         if (j >= N_ELEMENTS) {

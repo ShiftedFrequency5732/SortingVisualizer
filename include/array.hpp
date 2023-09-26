@@ -10,7 +10,7 @@ private:
 public:
     Array();
 
-    Element& operator [] (int i);
+    Element& operator[] (int i);
 
     void Draw();
 };

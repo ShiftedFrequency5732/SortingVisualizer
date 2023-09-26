@@ -19,8 +19,8 @@ void CountingSort::Prepare() {
 void CountingSort::Step() {
     if (this->i < N_ELEMENTS) {
         // Increment the number of appearances of the current element, make it red, and move on to the next one.
-        ++this->histogram[this->arr[this->i].getValue()];
-        this->arr[this->i].setFillColor(RED);
+        ++this->histogram[this->arr[this->i].GetValue()];
+        this->arr[this->i].SetFillColor(RED);
         ++this->i;
         return;
     }
@@ -32,8 +32,8 @@ void CountingSort::Step() {
         }
 
         // At the free slot in the array, store the current k-th element (number), make it red.
-        this->arr[this->free].setValue(this->k);
-        this->arr[this->free].setFillColor(RED);
+        this->arr[this->free].SetValue(this->k);
+        this->arr[this->free].SetFillColor(RED);
 
         // Decrement the number of times the number k appears in the histogram.
         --this->histogram[this->k];
