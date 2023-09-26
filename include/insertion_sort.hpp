@@ -5,7 +5,7 @@
 class InsertionSort : public Algorithm {
 private:
     int i, j;
-    bool end_j;
+    bool j_round_done;
     Element temp;
 
 public:
@@ -14,3 +14,4 @@ public:
     void Step();
     void Prepare();
 };
+

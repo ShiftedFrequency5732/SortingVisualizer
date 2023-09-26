@@ -4,10 +4,10 @@
 void SelectionSort::Prepare() {
     // At the start, we will look for the smallest element for the position 0.
     this->i = 0;
-
-    // Auxiliary fields for the selection sort.
     this->j = 0;
     this->min_i = 0;
+
+    // Auxiliary fields for the selection sort.
     this->j_round_done = true;
 }
 
