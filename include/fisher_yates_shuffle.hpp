@@ -9,7 +9,7 @@ private:
 public:
     using Algorithm::Algorithm;
 
-    void Step(); 
+    void Step();
     void Prepare();
 };
 
