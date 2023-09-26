@@ -1,3 +1,5 @@
+#pragma once
+
 #include <stack>
 #include "./algorithm.hpp"
 
@@ -6,15 +8,14 @@ private:
     std::stack<std::pair<int, int>> ranges;
     int low, high;
 
-    int curr_left, curr_right;
-    bool done_left;
-    bool done_right;
-
-    bool confirmed;
+    int left, right;
+    bool valid_ptrs;
+    bool left_checked;
+    bool right_checked;
 
     Element pivot;
     int pivot_index;
-    bool have_pivot;
+    bool pivot_set;
 
     bool done_partitioning;
 
@@ -26,3 +27,4 @@ public:
     void Prepare();
     void Step();
 };
+
