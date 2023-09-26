@@ -1,57 +1,65 @@
+#include <algorithm>
 #include "../include/merge_sort.hpp"
 
 void MergeSort::Prepare() {
+    // At the start, we will work with partitions of size 1 from the left to the right.
     this->partition_size = 1;
-    this->left = 0;
-    this->end_left = false;
+    this->low = 0;
+
+    // Auxiliary variables for the merge sort.
+    this->low_round_done = false;
     this->merge_done = false;
     this->coppied = false;
 }
 
-void MergeSort::Merge(int left, int mid, int right) {
+void MergeSort::Merge(int low, int mid, int high) {
     if (!this->coppied) {
-        this->left_length = mid - left + 1;
-        this->right_length = right - (mid + 1) + 1;
+        // Calculate the lengths of both partitions.
+        this->left_len = mid - low + 1;
+        this->right_len = high - (mid + 1) + 1;
 
-        for (int i = 0; i < this->left_length; ++i) {
-            this->temp_left[i] = this->arr[left + i].GetValue();
+        // Copy both left and right partitions to the temporary arrays.
+        for (int i = 0; i < this->left_len; ++i) {
+            this->left_tmp[i] = this->arr[low + i].GetValue();
         }
-        for (int i = 0; i < this->right_length; ++i) {
-            this->temp_right[i] = this->arr[mid + 1 + i].GetValue();
+        for (int i = 0; i < this->right_len; ++i) {
+            this->right_tmp[i] = this->arr[mid + 1 + i].GetValue();
         }
 
+        // Rememember that we did copy the partitions, so that we will do the actual merging now.
+        this->coppied = true;
 
+        // Initialize the indeces for merging.
         this->a = 0;
         this->b = 0;
-        this->free = left;
-        this->coppied = true;
+        this->free = low;
     }
 
-    if (a < left_length && b < right_length) {
-        if (temp_left[a] < temp_right[b]) {
-            this->arr[free].SetValue(temp_left[a]);
+    if (a < left_len && b < right_len) {
+        if (left_tmp[a] < right_tmp[b]) {
+            // In case the left_tmp has smaller element, store that one in the main array.
+            this->arr[free].SetValue(left_tmp[a++]);
             this->arr[free].SetFillColor(RED);
-            ++a;
         }
         else {
-            this->arr[free].SetValue(temp_right[b]);
+            // Otheriwse store the element from the right_tmp.
+            this->arr[free].SetValue(right_tmp[b++]);
             this->arr[free].SetFillColor(RED);
-            ++b;
         }
+
+        // Move to the next free slot.
         ++free;
     }
     else {
-        if (a < left_length) {
-            this->arr[free].SetValue(temp_left[a]);
-            this->arr[free].SetFillColor(RED);
-            ++free;
-            ++a;
+        // In case there is an array that we haven't merged yet completely, then add all of its elements to the array.
+        // Otherwise conclude the merging process.
+        if (a < left_len) {
+            this->arr[free].SetValue(left_tmp[a++]);
+            this->arr[free++].SetFillColor(RED);
         }
-        else if (b < right_length) {
-            this->arr[free].SetValue(temp_right[b]);
-            this->arr[free].SetFillColor(RED);
-            ++free;
-            ++b;
+        else if (b < right_len) {
+            this->arr[free].SetValue(right_tmp[b++]);
+            this->arr[free++].SetFillColor(RED);
         }
         else {
             this->merge_done = true;
@@ -61,30 +69,35 @@ void MergeSort::Merge(int left, int mid, int right) {
 
 void MergeSort::Step() {
     if (partition_size <= N_ELEMENTS - 1) {
-        if (this->end_left) {
-            this->left = 0;
-            this->end_left = false;
+        if (this->low_round_done) {
+            // In case we went through all the partitions of the current size, we will go through partitions of the current size * 2.
             partition_size = 2 * partition_size;
+            this->low_round_done = false;
+            this->low = 0;
         }
 
-        if (left < N_ELEMENTS - 1) {
-            int mid = std::min(left + partition_size - 1, N_ELEMENTS - 1);
-            int right = std::min(left + 2 * partition_size - 1, N_ELEMENTS - 1);
-
-            this->Merge(left, mid, right);
+        if (low < N_ELEMENTS - 1) {
+            // Calculate the boundaries for the left and the right partition, merge both of them.
+            int mid = std::min(low + partition_size - 1, N_ELEMENTS - 1);
+            int high = std::min(low + 2 * partition_size - 1, N_ELEMENTS - 1);
+            this->Merge(low, mid, high);
 
             if (this->merge_done) {
-                left = left + 2 * partition_size;
+                // In case the merge is completed, move to the first element after the right partition.
+                low = low + 2 * partition_size;
                 this->merge_done = false;
                 this->coppied = false;
             }
         }
         else {
-            this->end_left = true;
+            // If we went through all the partitions, remember that for the next function call.
+            this->low_round_done = true;
         }
 
         return;
     }
 
+    // In case we went through all the partitions and merged them, then we are done.
     this->finished = true;
 }
+

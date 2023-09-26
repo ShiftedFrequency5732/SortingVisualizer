@@ -1,27 +1,26 @@
 #pragma once
 
-#include <stack>
-
 #include "./algorithm.hpp"
 
 class MergeSort : public Algorithm {
 private:
     int partition_size;
-    int left;
-    bool end_left;
+
+    int low;
+    bool low_round_done;
 
     bool coppied;
     bool merge_done;
 
-    int left_length, a;
-    int temp_left[N_ELEMENTS];
+    int left_len, a;
+    int left_tmp[N_ELEMENTS];
 
-    int right_length, b;
-    int temp_right[N_ELEMENTS];
+    int right_len, b;
+    int right_tmp[N_ELEMENTS];
 
     int free;
 
-    void Merge(int left, int mid, int right);
+    void Merge(int low, int mid, int high);
 
 public:
     using Algorithm::Algorithm;
@@ -29,3 +28,4 @@ public:
     void Prepare();
     void Step();
 };
+
