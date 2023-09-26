@@ -6,7 +6,7 @@ void CountingSort::Prepare() {
         this->histogram[i] = 0;
     }
 
-    // At the start, we will go from the 1st element of the array.
+    // We will go from the 1st element of the array up to the end.
     this->i = 0;
 
     // The first free slot of the array is zero.
@@ -31,9 +31,9 @@ void CountingSort::Step() {
             ++this->k;
         }
 
-        // At the free slot in the array, store the current k-th element (number), make it red.
+        // At the free slot in the array, store the current k-th element (number), make it blue without reseting color.
         this->arr[this->free].SetValue(this->k);
-        this->arr[this->free].SetFillColor(RED);
+        this->arr[this->free].SetFillColor(BLUE, false);
 
         // Decrement the number of times the number k appears in the histogram.
         --this->histogram[this->k];
@@ -43,6 +43,6 @@ void CountingSort::Step() {
         return;
     }
 
-    // If we went through all the rounds, set that we finished sorting to true.
+    // If we completed the counting sort algorithm, set that we are done.
     this->finished = true;
 }
