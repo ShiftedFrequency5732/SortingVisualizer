@@ -1,5 +1,4 @@
 #include "../include/array.hpp"
-#include <cmath>
 
 Array::Array() {
     for (int i = 0; i < N_ELEMENTS; ++i) {
@@ -9,12 +8,14 @@ Array::Array() {
 
     // At the start, only 1/4 th number of elements will be visible.
     this->visible = N_ELEMENTS / 4;
+    Element::SetMaxValue(this->visible);
 }
 
 void Array::SetVisible(int visible) {
     if (visible >= N_ELEMENTS / 8 && visible < N_ELEMENTS) {
         // Change the number of visible elements only if it the passed number is in between 1/8th or 100% of all the elements.
         this->visible = visible;
+        Element::SetMaxValue(this->visible);
     }
 }
 

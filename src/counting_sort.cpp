@@ -20,7 +20,7 @@ void CountingSort::Step() {
     if (this->i < this->ArraySize()) {
         // Increment the number of appearances of the current element, make it red, and move on to the next one.
         ++this->histogram[this->arr[this->i].GetValue()];
-        this->arr[this->i].SetFillColor(RED);
+        this->arr[this->i].SetFocus(RED);
         ++this->i;
         return;
     }
@@ -33,7 +33,7 @@ void CountingSort::Step() {
 
         // At the free slot in the array, store the current k-th element (number), make it blue without reseting color.
         this->arr[this->free].SetValue(this->k);
-        this->arr[this->free].SetFillColor(BLUE, false);
+        this->arr[this->free].SetFocus(BLUE, false);
 
         // Decrement the number of times the number k appears in the histogram.
         --this->histogram[this->k];

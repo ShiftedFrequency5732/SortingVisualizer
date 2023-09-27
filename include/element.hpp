@@ -2,20 +2,27 @@
 
 #include "./raylib.h"
 
+void call_back(void *buffer, unsigned int frames);
+
 class Element {
 private:
     int value;
+    static int max_value;
+
     Color default_fill;
     Color current_fill;
     bool reset_fill;
 
-public: 
+
+public:
     Element(int value = 0, Color fill = WHITE);
+
+    static void SetMaxValue(int max_value);
 
     void SetValue(int value);
     int GetValue() const;
 
-    void SetFillColor(Color fill, bool reset_fill = true);
+    void SetFocus(Color fill, bool reset_fill = true);
     Color GetFillColor() const;
 
     bool ShouldResetFill() const;

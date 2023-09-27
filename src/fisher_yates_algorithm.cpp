@@ -17,8 +17,8 @@ void FisherYatesShuffle::Step() {
         this->arr[new_index] = temp;
 
         // Color the elements RED, to visualize the process.
-        this->arr[i].SetFillColor(RED);
-        this->arr[new_index].SetFillColor(RED);
+        this->arr[i].SetFocus(RED);
+        this->arr[new_index].SetFocus(RED);
 
         // Move backwards to the previous elements.
         --this->i;

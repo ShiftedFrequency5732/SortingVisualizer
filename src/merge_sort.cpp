@@ -39,12 +39,12 @@ void MergeSort::Merge(int low, int mid, int high) {
         if (left_tmp[a] < right_tmp[b]) {
             // In case the left_tmp has smaller element, store that one in the main array.
             this->arr[free].SetValue(left_tmp[a++]);
-            this->arr[free].SetFillColor(RED);
+            this->arr[free].SetFocus(RED);
         }
         else {
             // Otheriwse store the element from the right_tmp.
             this->arr[free].SetValue(right_tmp[b++]);
-            this->arr[free].SetFillColor(RED);
+            this->arr[free].SetFocus(RED);
         }
 
         // Move to the next free slot.
@@ -55,11 +55,11 @@ void MergeSort::Merge(int low, int mid, int high) {
         // Otherwise conclude the merging process.
         if (a < left_len) {
             this->arr[free].SetValue(left_tmp[a++]);
-            this->arr[free++].SetFillColor(RED);
+            this->arr[free++].SetFocus(RED);
         }
         else if (b < right_len) {
             this->arr[free].SetValue(right_tmp[b++]);
-            this->arr[free++].SetFillColor(RED);
+            this->arr[free++].SetFocus(RED);
         }
         else {
             this->merge_done = true;
