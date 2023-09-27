@@ -15,7 +15,6 @@ void BubbleSort::Step() {
 
             if (this->arr[j] > this->arr[j + 1]) {
                 // If you found the two elements that are in the wrong order, swap them.
-                // Remember that there was a change (a swap).
                 Element temp = this->arr[j];
                 this->arr[j] = this->arr[j + 1];
                 this->arr[j + 1] = temp;
@@ -26,7 +25,7 @@ void BubbleSort::Step() {
 
             if (this->j >= this->ArraySize() - 1 - i) {
                 // If we finished one round of the bubble sort, move onto the next.
-                // Color the newly sorted element with blue, and do not reset its color to default.
+                // Color the newly sorted element with blue, and do not reset its color.
                 this->arr[this->ArraySize() - 1 - i].SetFocus(BLUE, false);
                 this->j = 0;
                 ++this->i;
@@ -36,10 +35,11 @@ void BubbleSort::Step() {
         return;
     }
 
-    // If we have sorted n - 1 elements, we have sorted all the n elements.
+    // If we have sorted n - 1 elements out of n elements, then we have sorted all the n elements.
     // Therefore the algorithm above won't color the first element blue, so we will do it manually here.
     this->arr[0].SetFocus(BLUE, false);
 
     // If we went through all the rounds, set that we finished sorting to true.
     this->finished = true;
 }
+

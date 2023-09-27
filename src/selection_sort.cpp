@@ -4,22 +4,12 @@
 void SelectionSort::Prepare() {
     // At the start, we will look for the smallest element for the position 0.
     this->i = 0;
-    this->j = 0;
+    this->j = 1;
     this->min_i = 0;
-
-    // Auxiliary fields for the selection sort.
-    this->j_round_done = true;
 }
 
 void SelectionSort::Step() {
     if (this->i < this->ArraySize() - 1) {
-        if (this->j_round_done) {
-            // In case we have previously reached the end with j, then start looking for the smallest element again, to the right of the position i.
-            this->min_i = this->i;
-            this->j = this->min_i + 1;
-            this->j_round_done = false;
-        }
-
         if (j < this->ArraySize()) {
             if (this->arr[j] < this->arr[this->min_i]) {
                 // If you have found the smaller element than at the min_i, remember it.
@@ -29,10 +19,9 @@ void SelectionSort::Step() {
             // Color the element you are currently at with red, and increment the j.
             this->arr[j++].SetFocus(RED);
         }
-
-        if (j >= this->ArraySize()) {
+        else {
             if (this->i != this->min_i) {
-                // If we reached the end and looked for all the elements to the right of min_i, then check if we have found smaller element than min_i.
+                // If we reached the end and looked for all the elements to the right of min_i, then check if we have found the smaller element than the one at min_i.
                 // If we did, swap the element at the i with element at min_i.
                 Element temp = this->arr[this->i];
                 this->arr[this->i] = this->arr[this->min_i];
@@ -40,11 +29,12 @@ void SelectionSort::Step() {
             }
 
             // As this is the smallest element for this position, it is final, therefore color the i-th element with blue without reseting the color.
+            // If we didn't find anything smaller, then this element for this position is already the smallest one.
             this->arr[this->i].SetFocus(BLUE, false);
 
-            // If we didn't find anything smaller, then this element for this position is already the smallest one.
-            j_round_done = true;
             ++this->i;
+            this->min_i = this->i;
+            this->j = this->min_i + 1;
         }
 
         return;
@@ -57,3 +47,4 @@ void SelectionSort::Step() {
     // If we went through all the rounds, set that we finished sorting to true.
     this->finished = true;
 }
+

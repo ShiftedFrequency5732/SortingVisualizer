@@ -46,3 +46,4 @@ void CountingSort::Step() {
     // If we completed the counting sort algorithm, set that we are done.
     this->finished = true;
 }
+

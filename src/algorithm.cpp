@@ -9,7 +9,7 @@ int Algorithm::ArraySize() const {
     return this->arr.GetVisible();
 }
 
-bool Algorithm::IsDone() {
+bool Algorithm::IsDone() const {
     return this->finished;
 }
 

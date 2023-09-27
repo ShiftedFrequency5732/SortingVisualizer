@@ -1,14 +1,14 @@
 #include "../include/bogo_sort.hpp"
 
 void BogoSort::Prepare() {
-    // Set the iterator for shuffling to be at the last element, and for checking if elements are sorted at the start.
+    // Set the iterator for shuffling to be at the last element, and for checking if the elements are sorted at the start.
     this->i_shuffle = this->ArraySize() - 1;
     this->j_check = 0;
 }
 
 void BogoSort::Step() {
     if (i_shuffle >= 1) {
-        // For each element, (except the first one), that has index i, generate a new index in the range [0, i].
+        // For each element, (except the first one), that has the index i, generate a new index in the range [0, i].
         // We won't do this for the first element, as that element will always get the newly generated index to be 0.
         int new_index = GetRandomValue(0, this->i_shuffle);
 

@@ -12,7 +12,7 @@ protected:
 public:
     Algorithm(Array& a);
 
-    virtual bool IsDone();
+    virtual bool IsDone() const;
     virtual void Reset();
 
     virtual void Step() = 0;
