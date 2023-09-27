@@ -1,18 +1,18 @@
-#include "../include/raylib.h"
+#include "../../raylib/include/raylib.h"
 
 #include "../include/config.hpp"
 
-#include "../include/array.hpp"
-#include "../include/tone_generator.hpp"
+#include "../../algorithms/include/array.hpp"
+#include "../../algorithms/include/fisher_yates_shuffle.hpp"
+#include "../../algorithms/include/bogo_sort.hpp"
+#include "../../algorithms/include/counting_sort.hpp"
+#include "../../algorithms/include/bubble_sort.hpp"
+#include "../../algorithms/include/selection_sort.hpp"
+#include "../../algorithms/include/insertion_sort.hpp"
+#include "../../algorithms/include/merge_sort.hpp"
+#include "../../algorithms/include/quick_sort.hpp"
 
-#include "../include/fisher_yates_shuffle.hpp"
-#include "../include/bogo_sort.hpp"
-#include "../include/counting_sort.hpp"
-#include "../include/bubble_sort.hpp"
-#include "../include/selection_sort.hpp"
-#include "../include/insertion_sort.hpp"
-#include "../include/merge_sort.hpp"
-#include "../include/quick_sort.hpp"
+#include "../../audio/include/tone_generator.hpp"
 
 int main() {
     // Initialize the window with the width, the height, the title, set the target FPS, make it resizable.
@@ -21,23 +21,23 @@ int main() {
     SetWindowState(FLAG_WINDOW_RESIZABLE | FLAG_WINDOW_MAXIMIZED);
 
     // Initialize the audio.
-    ToneGenerator::Initialize();
+    Audio::ToneGenerator::Initialize();
 
     // Array with elements that we will work on.
-    Array data;
-    FisherYatesShuffle shuffler(data);
+    Algorithms::Array data;
 
     // Algorithms that can be used on the data array.
-    BogoSort bogo_alg(data);
-    CountingSort counting_alg(data);
-    BubbleSort bubble_alg(data);
-    SelectionSort selection_alg(data);
-    InsertionSort insertion_alg(data);
-    MergeSort merge_alg(data);
-    QuickSort quick_alg(data);
+    Algorithms::FisherYatesShuffle shuffler(data);
+    Algorithms::BogoSort bogo_alg(data);
+    Algorithms::CountingSort counting_alg(data);
+    Algorithms::BubbleSort bubble_alg(data);
+    Algorithms::SelectionSort selection_alg(data);
+    Algorithms::InsertionSort insertion_alg(data);
+    Algorithms::MergeSort merge_alg(data);
+    Algorithms::QuickSort quick_alg(data);
 
-    // Pointer points to the picked algorithm by the user, flag indicates whether to run the algorithm or not.
-    Algorithm* sorting_algorithm = &bogo_alg;
+    // Pointer that points to the picked algorithm by the user, flag indicates whether to run the algorithm or not.
+    Algorithms::ArrayAlgorithm* sorting_algorithm = &bogo_alg;
     bool run_algorithm = false;
 
     // Flag that indicates whether to show help text or not.
@@ -79,7 +79,7 @@ int main() {
             else {
                 // After sorting the array, stop running the algorithm, and stop the ToneGenerator.
                 run_algorithm = false;
-                ToneGenerator::Stop();
+                Audio::ToneGenerator::Stop();
             }
         }
 
@@ -119,11 +119,11 @@ int main() {
 
         if (IsKeyPressed(KEY_M)) {
             if (run_algorithm && audio_effects) {
-                ToneGenerator::Stop();
+                Audio::ToneGenerator::Stop();
                 audio_effects = false;
             }
             else if (run_algorithm && !audio_effects) {
-                ToneGenerator::Play();
+                Audio::ToneGenerator::Play();
                 audio_effects = true;
             }
             else {
@@ -140,17 +140,17 @@ int main() {
 
             if (run_algorithm && audio_effects) {
                 // If we are about to run the algorithm, start the tone generator.
-                ToneGenerator::Play();
+                Audio::ToneGenerator::Play();
             }
             else {
                 // If we want to stop the algorithm, stop the tone generator as well.
-                ToneGenerator::Stop();
+                Audio::ToneGenerator::Stop();
             }
         }
     }
 
     // Releasing resources.
-    ToneGenerator::Dispose();
+    Audio::ToneGenerator::Dispose();
     CloseWindow();
 
     return 0;
