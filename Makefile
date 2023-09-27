@@ -3,10 +3,11 @@
 
 CXX = g++
 CXXFLAGS = -O2 -Wall -Wno-missing-braces -lraylib -lopengl32 -lgdi32 -lwinmm
+OUT = program.exe
 
 SRC = $(wildcard ./*/src/*.cpp)
 
 default: $(SRC)
 	@$(info $(SRC))
-	$(CXX) $^ -o program.exe -I ./ -L ./raylib/lib/ $(CXXFLAGS)
+	$(CXX) $^ -o $(OUT) -I ./ -L ./raylib/lib/ $(CXXFLAGS)
 
