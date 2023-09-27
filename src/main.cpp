@@ -13,11 +13,16 @@
 #include "../include/merge_sort.hpp"
 #include "../include/quick_sort.hpp"
 
+#include "../include/tone_generator.hpp"
+
 int main() {
     // Initialize the window with the width, the height, the title, set the target FPS, make it resizable.
     InitWindow(INITIAL_WIDTH, INITIAL_HEIGHT, WINDOW_TITLE);
     SetTargetFPS(GetMonitorRefreshRate(GetCurrentMonitor()));
     SetWindowState(FLAG_WINDOW_RESIZABLE);
+
+    // Initialize the audio.
+    ToneGenerator::Initialize();
 
     Array data;
     FisherYatesShuffle shuffler(data);
@@ -44,6 +49,7 @@ int main() {
         ClearBackground(BLANK);
         data.Draw();
 
+
         if (show_help) {
             // Draw the help box on the center of the screen, based on the text size.
             Vector2 txt_size = MeasureTextEx(GetFontDefault(), HELP_TEXT, FONT_SIZE, SPACING);
@@ -54,6 +60,7 @@ int main() {
         EndDrawing();
 
         if (run_algorithm) {
+            ToneGenerator::Play();
             if (!shuffler.IsDone()) {
                 // Shuffle the array first before running the actual sorting algorithm.
                 shuffler.Step();
@@ -65,6 +72,7 @@ int main() {
             else {
                 // After sorting the array, stop running the algorithms.
                 run_algorithm = false;
+                ToneGenerator::Stop();
             }
         }
 
@@ -107,8 +115,11 @@ int main() {
         if (!run_algorithm) {
             float scroll_value = GetMouseWheelMove();
             data.SetVisible(data.GetVisible() + scroll_value);
+            ToneGenerator::Stop();
         }
     }
+
+    ToneGenerator::Dispose();
 
     return 0;
 }

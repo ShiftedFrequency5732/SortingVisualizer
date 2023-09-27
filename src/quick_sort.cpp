@@ -41,7 +41,7 @@ void QuickSort::Partition() {
             // If we still didn't finish checking left parttition, check it.
             // Move the left pointer as long as it points to the elements that is lesser than (or equal to) the pivot.
             if (this->arr[left] <= pivot && left < right) {
-                this->arr[left].SetFillColor(RED);
+                this->arr[left].SetFocus(RED);
                 ++this->left;
             }
             else {
@@ -54,7 +54,7 @@ void QuickSort::Partition() {
             // If we still didn't finish checking the right partition, check it.
             // Move the right pointer as long as it points to the greater element than the pivot.
             if (this->arr[right] > pivot) {
-                this->arr[right].SetFillColor(RED);
+                this->arr[right].SetFocus(RED);
                 --this->right;
             }
             else {
@@ -76,8 +76,8 @@ void QuickSort::Partition() {
             this->arr[this->right] = temp;
 
             // Color the elements red.
-            this->arr[this->left].SetFillColor(RED);
-            this->arr[this->right].SetFillColor(RED);
+            this->arr[this->left].SetFocus(RED);
+            this->arr[this->right].SetFocus(RED);
             return;
         }
     }
@@ -89,8 +89,8 @@ void QuickSort::Partition() {
     pivot_index = right;
 
     // Color both elements to the RED.
-    this->arr[right].SetFillColor(RED);
-    this->arr[low].SetFillColor(RED);
+    this->arr[right].SetFocus(RED);
+    this->arr[low].SetFocus(RED);
 
     // Remember that we did partition this range. The pivot is now sorted.
     // As everything to the left is lesser than or equal to it, and everything to the right is greater than it.
@@ -108,7 +108,7 @@ void QuickSort::Step() {
 
         if (low == high) {
             // If this range contains only one element, color it blue, it is for sure sorted. And try picking range again.
-            this->arr[low].SetFillColor(BLUE, false);
+            this->arr[low].SetFocus(BLUE, false);
             return;
         }
         else if (low > high) {
@@ -131,7 +131,7 @@ void QuickSort::Step() {
 
     if (this->done_partitioning) {
         // If we did partition the array, color the pivot blue, as it is for sure sorted.
-        this->arr[pivot_index].SetFillColor(BLUE, false);
+        this->arr[pivot_index].SetFocus(BLUE, false);
 
         // Add to the stack of ranges both ranges, but smaller one first, so we won't have as many ranges in it.
         if ((pivot_index - 1) - low + 1 <= high - (pivot_index + 1) + 1) {

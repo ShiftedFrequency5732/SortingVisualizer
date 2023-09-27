@@ -23,7 +23,7 @@ void InsertionSort::Step() {
             // If the j-th element is greater than temp, copy it to the following position, make it red.
             this->arr[this->j + 1] = this->arr[this->j];
             if (this->i < this->ArraySize() - 1) {
-                this->arr[this->j + 1].SetFillColor(RED);
+                this->arr[this->j + 1].SetFocus(RED);
             }
             --j;
         }
