@@ -5,9 +5,7 @@
 class MergeSort : public Algorithm {
 private:
     int partition_size;
-
     int low;
-    bool low_round_done;
 
     bool coppied;
     bool merge_done;

@@ -18,7 +18,7 @@ int main() {
     // Initialize the window with the width, the height, the title, set the target FPS, make it resizable.
     InitWindow(INITIAL_WIDTH, INITIAL_HEIGHT, WINDOW_TITLE);
     SetTargetFPS(GetMonitorRefreshRate(GetCurrentMonitor()));
-    SetWindowState(FLAG_WINDOW_RESIZABLE);
+    SetWindowState(FLAG_WINDOW_RESIZABLE | FLAG_WINDOW_MAXIMIZED);
 
     // Initialize the audio.
     ToneGenerator::Initialize();

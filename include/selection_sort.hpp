@@ -5,7 +5,6 @@
 class SelectionSort : public Algorithm {
 private:
     int i, min_i, j;
-    bool j_round_done;
 
 public:
     using Algorithm::Algorithm;

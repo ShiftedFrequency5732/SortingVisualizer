@@ -5,7 +5,6 @@
 class InsertionSort : public Algorithm {
 private:
     int i, j;
-    bool j_round_done;
     Element temp;
 
 public:

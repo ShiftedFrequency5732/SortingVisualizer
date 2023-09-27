@@ -24,11 +24,10 @@ void QuickSort::Partition() {
         this->right = this->high;
 
         // Initialize the flags to false, we must first check if the pointers are valid (once), THEN check the left partition (fully) AND THEN the right partition (fully).
-        // After that the elements that the left and right ptrs point to may be swapped.
+        // After that the elements that the left and right ptrs point to may be swapped, if pointers still point to the valid range.
         this->left_checked = false;
         this->right_checked = false;
         this->valid_ptrs = false;
-        return;
     }
 
     if (this->left < this->right) {
@@ -38,34 +37,33 @@ void QuickSort::Partition() {
 
     if (this->valid_ptrs) {
         if (!this->left_checked) {
-            // If we still didn't finish checking left parttition, check it.
-            // Move the left pointer as long as it points to the elements that is lesser than (or equal to) the pivot.
+            // If we still didn't finish checking the left parttition, check it.
+            // Move the left pointer forwards as long as it points to the element that is lesser than (or equal to) the pivot, color that element red.
             if (this->arr[left] <= pivot && left < right) {
                 this->arr[left].SetFocus(RED);
                 ++this->left;
+                return;
             }
             else {
                 this->left_checked = true;
             }
-            return;
         }
 
         if (!this->right_checked) {
             // If we still didn't finish checking the right partition, check it.
-            // Move the right pointer as long as it points to the greater element than the pivot.
+            // Move the right pointer backwards as long as it points to the greater element than the pivot, color that element red.
             if (this->arr[right] > pivot) {
                 this->arr[right].SetFocus(RED);
                 --this->right;
+                return;
             }
             else {
                 this->right_checked = true;
             }
-            return;
         }
 
         if (this->left < this->right) {
-            // If did check both left and right sides, reset the flags as we will check them again.
-            // Reset the valid_ptrs flag as well, as we want to check if the pointers are still valid.
+            // If did check both left and right partitions, reset the flags as we will check them again.
             this->left_checked = false;
             this->right_checked = false;
             this->valid_ptrs = false;
@@ -82,7 +80,7 @@ void QuickSort::Partition() {
         }
     }
 
-    // At this point, the right is lesser than left, and it points to the last element of the left partition.
+    // At this point, the right is lesser than the left, and it points to the last element of the left partition.
     // Which is the element that is lesser or equal to the pivot. Swap the pivot at the low with that element.
     this->arr[low] = this->arr[right];
     this->arr[right] = pivot;
@@ -93,35 +91,34 @@ void QuickSort::Partition() {
     this->arr[low].SetFocus(RED);
 
     // Remember that we did partition this range. The pivot is now sorted.
-    // As everything to the left is lesser than or equal to it, and everything to the right is greater than it.
+    // Everything to the left of it is lesser than or equal to it, and everything to the right is greater than it.
     this->done_partitioning = true;
 }
 
 void QuickSort::Step() {
-    if (this->done_partitioning && !ranges.empty()) {
-        // If we finished partitioning in the previous round, and if we still have ranges to cover, take one range from the stack.
+    while (this->done_partitioning && !ranges.empty()) {
+        // If we finished partitioning in the previous round, and if we still have the ranges to cover, take one range from the stack.
         std::pair<int, int> r = ranges.top();
         ranges.pop();
 
-        low = r.first;
-        high = r.second;
+        this->low = r.first;
+        this->high = r.second;
 
-        if (low == high) {
-            // If this range contains only one element, color it blue, it is for sure sorted. And try picking range again.
-            this->arr[low].SetFocus(BLUE, false);
-            return;
-        }
-        else if (low > high) {
-            // If the range we picked is invalid, try again.
-            return;
+        if (this->low == this->high) {
+            // If this range contains only one element, color it blue, it is for sure sorted. Try picking range again.
+            this->arr[this->low].SetFocus(BLUE, false);
         }
 
-        // Reset the boolean flags so that we will perform the quick sort again.
-        this->done_partitioning = false;
-        this->pivot_set = false;
+        if (this->low < this->high) {
+            // Reset the boolean flags so that we will perform the quick sort again, exit the loop.
+            this->done_partitioning = false;
+            this->pivot_set = false;
+            break;
+        }
     }
-    else if (this->done_partitioning && ranges.empty()) {
-        // If we finished partitioning the subarray in the previous round, and we are out of ranges, then we are done.
+
+    if (this->done_partitioning && ranges.empty()) {
+        // If we finished partitioning the subarray in the previous round, and if we are out of ranges, then we are done.
         finished = true;
         return;
     }
@@ -133,7 +130,7 @@ void QuickSort::Step() {
         // If we did partition the array, color the pivot blue, as it is for sure sorted.
         this->arr[pivot_index].SetFocus(BLUE, false);
 
-        // Add to the stack of ranges both ranges, but smaller one first, so we won't have as many ranges in it.
+        // Add to the stack of ranges both ranges, but smaller one first, so we will abuse the stack less.
         if ((pivot_index - 1) - low + 1 <= high - (pivot_index + 1) + 1) {
             ranges.push({ low, pivot_index - 1 });
             ranges.push({ pivot_index + 1, high});
