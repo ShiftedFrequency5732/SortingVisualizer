@@ -1,6 +1,6 @@
-#include "../../raylib/include/raylib.h"
-
 #include "../include/config.hpp"
+
+#include "../../raylib/include/raylib.h"
 
 #include "../../algorithms/include/array.hpp"
 #include "../../algorithms/include/fisher_yates_shuffle.hpp"

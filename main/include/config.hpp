@@ -7,7 +7,7 @@ namespace Constants {
     constexpr const char* WINDOW_TITLE = "Sorting Visualizer - by JV";
 
     // Array related constants.
-    constexpr int N_ELEMENTS = 100;
+    constexpr int N_ELEMENTS = 250;
 
     // Help related constants.
     constexpr int SPACING = 1;
