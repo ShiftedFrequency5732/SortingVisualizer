@@ -4,8 +4,8 @@
 
 #include "../include/array.hpp"
 #include "../include/tone_generator.hpp"
-#include "../include/fisher_yates_shuffle.hpp"
 
+#include "../include/fisher_yates_shuffle.hpp"
 #include "../include/bogo_sort.hpp"
 #include "../include/counting_sort.hpp"
 #include "../include/bubble_sort.hpp"
@@ -42,6 +42,9 @@ int main() {
 
     // Flag that indicates whether to show help text or not.
     bool show_help = true;
+
+    // Flag that indicates whether the audio effects should play.
+    bool audio_effects = true;
 
     while (!WindowShouldClose()) {
         // Prepare the new frame buffer.
@@ -114,6 +117,20 @@ int main() {
             data.SetVisible(data.GetVisible() + scroll_value);
         }
 
+        if (IsKeyPressed(KEY_M)) {
+            if (run_algorithm && audio_effects) {
+                ToneGenerator::Stop();
+                audio_effects = false;
+            }
+            else if (run_algorithm && !audio_effects) {
+                ToneGenerator::Play();
+                audio_effects = true;
+            }
+            else {
+                audio_effects = !audio_effects;
+            }
+        }
+
         if (IsKeyPressed(KEY_SPACE)) {
             // Prepare shuffler and the sorting algorithm, toggle the run flag.
             shuffler.Reset();
@@ -121,7 +138,7 @@ int main() {
             run_algorithm = !run_algorithm;
             show_help = false;
 
-            if (run_algorithm) {
+            if (run_algorithm && audio_effects) {
                 // If we are about to run the algorithm, start the tone generator.
                 ToneGenerator::Play();
             }
