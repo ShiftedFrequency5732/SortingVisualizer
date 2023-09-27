@@ -52,7 +52,7 @@ void SelectionSort::Step() {
 
     // If we sort n - 1 elements, and we have n elements, then we have sorted all of them.
     // Based on that, the above algorithm won't color the last element to blue, so we will do it manually.
-    this->arr[N_ELEMENTS - 1].SetFocus(BLUE, false);
+    this->arr[this->ArraySize() - 1].SetFocus(BLUE, false);
 
     // If we went through all the rounds, set that we finished sorting to true.
     this->finished = true;
