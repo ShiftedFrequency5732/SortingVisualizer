@@ -5,7 +5,7 @@
 
 class Array {
 private:
-    Element vector[N_ELEMENTS];
+    Element vector[Constants::N_ELEMENTS];
     int visible;
 
 public:

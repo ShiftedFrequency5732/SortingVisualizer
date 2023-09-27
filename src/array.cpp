@@ -2,18 +2,18 @@
 #include "../include/array.hpp"
 
 Array::Array() {
-    for (int i = 0; i < N_ELEMENTS; ++i) {
+    for (int i = 0; i < Constants::N_ELEMENTS; ++i) {
         // Set default values to all the elements.
         vector[i].SetValue(i + 1);
     }
 
     // At the start, only 1/4th number of elements will be visible.
-    this->visible = N_ELEMENTS / 4;
+    this->visible = Constants::N_ELEMENTS / 4;
     Element::SetMaxValue(this->visible);
 }
 
 void Array::SetVisible(int visible) {
-    if (visible >= N_ELEMENTS / 8 && visible < N_ELEMENTS) {
+    if (visible >= Constants::N_ELEMENTS / 8 && visible < Constants::N_ELEMENTS) {
         // Change the number of visible elements only if it the passed number is in between 1/8th or 100% of all the elements.
         Element::SetMaxValue(this->visible);
         this->visible = visible;

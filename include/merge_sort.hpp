@@ -11,10 +11,10 @@ private:
     bool merge_done;
 
     int left_len, a;
-    int left_tmp[N_ELEMENTS];
+    int left_tmp[Constants::N_ELEMENTS];
 
     int right_len, b;
-    int right_tmp[N_ELEMENTS];
+    int right_tmp[Constants::N_ELEMENTS];
 
     int free;
 

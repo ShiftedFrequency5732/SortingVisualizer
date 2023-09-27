@@ -2,7 +2,7 @@
 #include "../include/config.hpp"
 #include "../include/tone_generator.hpp"
 
-int Element::max_value = N_ELEMENTS / 4;
+int Element::max_value = Constants::N_ELEMENTS / 4;
 
 Element::Element(int value, Color fill) {
     this->value = value;
@@ -27,7 +27,7 @@ void Element::SetFocus(Color fill, bool reset_fill) {
 
     // Set the frequency of the tone generator based on the value of the current element.
     // We will take the current value and divide with the maximum value so we get the % and multiply that with the MAX_FREQUENCY.
-    ToneGenerator::SetFrequency(1.0f * this->value / Element::max_value * MAX_FREQUENCY);
+    ToneGenerator::SetFrequency(1.0f * this->value / Element::max_value * Constants::MAX_FREQUENCY);
 }
 
 Color Element::GetFillColor() const {

@@ -16,7 +16,7 @@
 
 int main() {
     // Initialize the window with the width, the height, the title, set the target FPS, make it resizable.
-    InitWindow(INITIAL_WIDTH, INITIAL_HEIGHT, WINDOW_TITLE);
+    InitWindow(Constants::INITIAL_HEIGHT, Constants::INITIAL_HEIGHT, Constants::WINDOW_TITLE);
     SetTargetFPS(GetMonitorRefreshRate(GetCurrentMonitor()));
     SetWindowState(FLAG_WINDOW_RESIZABLE | FLAG_WINDOW_MAXIMIZED);
 
@@ -58,10 +58,10 @@ int main() {
 
         if (show_help) {
             // Draw the help box on the center of the screen, based on the text size.
-            Vector2 txt_size = MeasureTextEx(GetFontDefault(), HELP_TEXT, FONT_SIZE, SPACING);
+            Vector2 txt_size = MeasureTextEx(GetFontDefault(), Constants::HELP_TEXT, Constants::FONT_SIZE, Constants::SPACING);
             Vector2 upper_left = { GetRenderWidth() / 2 - txt_size.x / 2, GetRenderHeight() / 2 - txt_size.y / 2 };
-            DrawRectangle(upper_left.x - BG_MARGIN / 2, upper_left.y - BG_MARGIN / 2, txt_size.x + BG_MARGIN, txt_size.y + BG_MARGIN, LIGHTGRAY);
-            DrawTextEx(GetFontDefault(), HELP_TEXT, upper_left, FONT_SIZE, SPACING, BLACK);
+            DrawRectangle(upper_left.x - Constants::BG_MARGIN / 2, upper_left.y - Constants::BG_MARGIN / 2, txt_size.x + Constants::BG_MARGIN, txt_size.y + Constants::BG_MARGIN, LIGHTGRAY);
+            DrawTextEx(GetFontDefault(), Constants::HELP_TEXT, upper_left, Constants::FONT_SIZE, Constants::SPACING, BLACK);
         }
 
         // Send the frame buffer for drawing.

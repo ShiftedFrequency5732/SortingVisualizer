@@ -1,6 +1,7 @@
 #define _USE_MATH_DEFINES
 #include <cmath>
 
+#include "../include/config.hpp"
 #include "../include/tone_generator.hpp"
 
 float ToneGenerator::frequency = 440.0f;
@@ -13,10 +14,10 @@ void ToneGenerator::wave_generator_callback(void *buffer, unsigned int frames) {
 
     for (unsigned int i = 0; i < frames; ++i) {
         // Calculate the frequency of the i-th sample.
-        data[i] = (short)(32000.0f * tanh(2 * M_PI * tanhIdx));
+        data[i] = (short)(Constants::AMPLITUDE * tanh(2 * M_PI * tanhIdx));
 
         // Increment the tanhIdx, if there is no change in the wave there is no sound.
-        tanhIdx += frequency / 44100.0f;
+        tanhIdx += frequency / Constants::SAMPLING_RATE;
         if (tanhIdx > 1.0f) {
             tanhIdx -= 1.0f;
         }
@@ -29,10 +30,10 @@ void ToneGenerator::Initialize() {
     if (!is_initialized) {
         // Initialize the audio device and set the size of the audio buffer that will contain the frequencies of each sample.
         InitAudioDevice();
-        SetAudioStreamBufferSizeDefault(4096);
+        SetAudioStreamBufferSizeDefault(Constants::BUFFER_SIZE);
 
         // Create audio stream object with the sample rate of 44100, the sample size of 16 bits, for 1 single channel.
-        stream = LoadAudioStream(44100, 16, 1);
+        stream = LoadAudioStream(Constants::SAMPLING_RATE, Constants::SAMPLE_SIZE, 1);
         SetAudioStreamCallback(stream, wave_generator_callback);
 
         // Remember that we did initalize the audio.
