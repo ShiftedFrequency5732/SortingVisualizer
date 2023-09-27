@@ -4,7 +4,7 @@
 void QuickSort::Prepare() {
     // At the start, clear the stack, and we will run the partitioning on the whole array, so add the { 0, n - 1 } to the stack.
     this->ranges = std::stack<std::pair<int, int>>();
-    this->ranges.push({ 0, this->ArraySize() });
+    this->ranges.push({ 0, this->ArraySize() - 1 });
 
     // Auxiliary variables for the quick sort.
     this->done_partitioning = true;

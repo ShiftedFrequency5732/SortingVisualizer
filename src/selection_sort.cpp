@@ -12,7 +12,7 @@ void SelectionSort::Prepare() {
 }
 
 void SelectionSort::Step() {
-    if (this->i < N_ELEMENTS - 1) {
+    if (this->i < this->ArraySize() - 1) {
         if (this->j_round_done) {
             // In case we have previously reached the end with j, then start looking for the smallest element again, to the right of the position i.
             this->min_i = this->i;
@@ -20,7 +20,7 @@ void SelectionSort::Step() {
             this->j_round_done = false;
         }
 
-        if (j < N_ELEMENTS) {
+        if (j < this->ArraySize()) {
             if (this->arr[j] < this->arr[this->min_i]) {
                 // If you have found the smaller element than at the min_i, remember it.
                 this->min_i = j;
@@ -30,7 +30,7 @@ void SelectionSort::Step() {
             this->arr[j++].SetFillColor(RED);
         }
 
-        if (j >= N_ELEMENTS) {
+        if (j >= this->ArraySize()) {
             if (this->i != this->min_i) {
                 // If we reached the end and looked for all the elements to the right of min_i, then check if we have found smaller element than min_i.
                 // If we did, swap the element at the i with element at min_i.
@@ -52,7 +52,7 @@ void SelectionSort::Step() {
 
     // If we sort n - 1 elements, and we have n elements, then we have sorted all of them.
     // Based on that, the above algorithm won't color the last element to blue, so we will do it manually.
-    this->arr[N_ELEMENTS - 1].SetFillColor(BLUE, false);
+    this->arr[this->ArraySize() - 1].SetFillColor(BLUE, false);
 
     // If we went through all the rounds, set that we finished sorting to true.
     this->finished = true;
