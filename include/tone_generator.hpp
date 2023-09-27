@@ -1,8 +1,5 @@
 #pragma once
 
-#define _USE_MATH_DEFINES
-#include <math.h>
-
 #include "../include/raylib.h"
 
 class ToneGenerator {
@@ -25,3 +22,4 @@ public:
 
     static void Dispose();
 };
+

@@ -2,8 +2,6 @@
 
 #include "./raylib.h"
 
-void call_back(void *buffer, unsigned int frames);
-
 class Element {
 private:
     int value;
@@ -12,7 +10,6 @@ private:
     Color default_fill;
     Color current_fill;
     bool reset_fill;
-
 
 public:
     Element(int value = 0, Color fill = WHITE);

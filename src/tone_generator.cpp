@@ -1,7 +1,10 @@
+#define _USE_MATH_DEFINES
+#include <cmath>
+
 #include "../include/tone_generator.hpp"
 
-float ToneGenerator::frequency = 440;
-float ToneGenerator::tanhIdx = 0;
+float ToneGenerator::frequency = 440.0f;
+float ToneGenerator::tanhIdx = 0.0f;
 AudioStream ToneGenerator::stream;
 
 void ToneGenerator::wave_generator_callback(void *buffer, unsigned int frames) {
@@ -24,13 +27,11 @@ void ToneGenerator::Initialize() {
     static bool is_initialized = false;
 
     if (!is_initialized) {
-        // Initialize the audio device, and set the sampling rate.
+        // Initialize the audio device and set the size of the audio buffer that will contain the frequencies of each sample.
         InitAudioDevice();
-
-        // Set the size of the audio buffer that will contain the frequencies.
         SetAudioStreamBufferSizeDefault(4096);
 
-        // Create audio stream object with sample rate of 44100, sample size of 16 bits, for 1 single channel.
+        // Create audio stream object with the sample rate of 44100, the sample size of 16 bits, for 1 single channel.
         stream = LoadAudioStream(44100, 16, 1);
         SetAudioStreamCallback(stream, wave_generator_callback);
 

@@ -1,3 +1,4 @@
+#include <cmath>
 #include "../include/array.hpp"
 
 Array::Array() {
@@ -6,7 +7,7 @@ Array::Array() {
         vector[i].SetValue(i + 1);
     }
 
-    // At the start, only 1/4 th number of elements will be visible.
+    // At the start, only 1/4th number of elements will be visible.
     this->visible = N_ELEMENTS / 4;
     Element::SetMaxValue(this->visible);
 }
@@ -14,8 +15,8 @@ Array::Array() {
 void Array::SetVisible(int visible) {
     if (visible >= N_ELEMENTS / 8 && visible < N_ELEMENTS) {
         // Change the number of visible elements only if it the passed number is in between 1/8th or 100% of all the elements.
-        this->visible = visible;
         Element::SetMaxValue(this->visible);
+        this->visible = visible;
     }
 }
 
@@ -32,7 +33,7 @@ void Array::Draw() {
 
     for (int i = 0; i < visible; ++i) {
         // Calculate the height of each element, based on its height, the height will be equal to the % of the window height.
-        int element_heigth = (1.0 * GetRenderHeight() * vector[i].GetValue() / visible);
+        int element_heigth = ceil(1.0 * GetRenderHeight() * vector[i].GetValue() / visible);
 
         // Calculate the width of each element, based on the window width.
         int element_width = 1.0 * GetRenderWidth() / visible;
@@ -41,7 +42,7 @@ void Array::Draw() {
         // To fill that in, the remainder number of elements need to have its width increased by one pixel.
         bool increase_width = i < GetRenderWidth() % visible;
 
-        // Draw the element the i-th slice of the window, at the height of the element from the bottom of the screen of calculated size, with its current color.
+        // Draw the element on the i-th slice of the window, at the height of the element from the bottom of the screen of calculated size, with its current color.
         DrawRectangle(i * element_width + x_offset, GetRenderHeight() - element_heigth, element_width + (int)increase_width, element_heigth, vector[i].GetFillColor());
 
         if (increase_width) {
@@ -49,9 +50,9 @@ void Array::Draw() {
             ++x_offset;
         }
 
-        // Reset the color of the element to white in case it was changed.
         if (vector[i].ShouldResetFill()) {
             vector[i].ResetFill();
         }
     }
 }
+
